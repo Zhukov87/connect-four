@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import classNames from "classnames";
-import { turn, checkWinner } from "../action creators/actionCreators";
+import { turn } from "../actionCreators/actionCreators";
 
 const styles = {
   gameField: {
@@ -22,7 +22,7 @@ const styles = {
     marginBottom: 20
   },
   playerOne: {
-    background: "green"
+    background: "red"
   },
   playerTwo: {
     background: "yellow"
@@ -33,12 +33,8 @@ class GameField extends Component {
   handleTurn = (col, turnPlayer) => {
     this.props.gameField[col][0] || this.props.winner
       ? null
-      : this.props.turn(col, turnPlayer);
+      : this.props.turn(this.props.gameField, col, turnPlayer);
   };
-
-  componentDidUpdate() {
-    this.props.checkWinner(this.props.gameField);
-  }
 
   render() {
     const { gameField, turnPlayer, classes } = this.props;
@@ -73,6 +69,6 @@ export default withStyles(styles)(
         winner: state.game.winner
       };
     },
-    { turn, checkWinner }
+    { turn }
   )(GameField)
 );

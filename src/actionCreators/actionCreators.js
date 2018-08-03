@@ -1,15 +1,12 @@
-import { TURN, CHECK_WINNER } from "./constants";
+import { TURN, CHECK_WINNER } from './constants';
+import { makeTurn, checkWinner } from '../lib/connectFour';
 
-export function turn(col, turnPlayer) {
+export function turn(gameField, col, turnPlayer) {
+  const nextField = makeTurn(gameField, col, turnPlayer);
+  const winner = checkWinner(nextField);
+
   return {
     type: TURN,
-    payload: { col, turnPlayer }
-  };
-}
-
-export function checkWinner(gameField, turnPlayer) {
-  return {
-    type: CHECK_WINNER,
-    payload: { gameField, turnPlayer }
+    payload: { gameField: nextField, winner },
   };
 }
