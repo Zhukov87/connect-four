@@ -25,26 +25,29 @@ export const makeTurn = (field, col, player) => {
 //   null - if the game continues
 export const checkWinner = field => {
   //check column
-  let result;
-  field.forEach(element => {
-    let counter = 0;
-    return element.forEach((item, index, arr) => {
-      if (item === arr[index - 1] && item !== false) counter++;
-      if (counter === 3) result = item;
-    });
-  });
-  if (result) return result;
+
+  for (let i = 0; i < field.length; i++) {
+    for (let j = 0; j < field.length - 3; j++) {
+      if (
+        field[i][j] === field[i][j + 1] &&
+        field[i][j] === field[i][j + 2] &&
+        field[i][j] === field[i][j + 3] &&
+        field[i][j] !== false
+      )
+        return field[i][j];
+    }
+  }
 
   //check row
-  for (let i = 0; i < field.length - 1; i++) {
-    let counter = 0;
-    for (let j = 0; j < field[i].length; j++) {
-      if (field[j + 1] !== undefined) {
-        field[j][i] === field[j + 1][i] && field[j][i] !== false
-          ? counter++
-          : (counter = 0);
-        if (counter === 3) return field[j][i];
-      }
+  for (let i = 0; i < field.length - 3; i++) {
+    for (let j = 0; j < field.length - 1; j++) {
+      if (
+        field[i][j] === field[i + 1][j] &&
+        field[i][j] === field[i + 2][j] &&
+        field[i][j] === field[i + 3][j] &&
+        field[i][j] !== false
+      )
+        return field[i][j];
     }
   }
 
