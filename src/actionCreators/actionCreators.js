@@ -1,5 +1,5 @@
-import { TURN, CHECK_WINNER } from './constants';
-import { makeTurn, checkWinner } from '../lib/connectFour';
+import { TURN } from "./constants";
+import { makeTurn, checkWinner } from "../lib/connectFour";
 
 export function turn(gameField, col, turnPlayer) {
   const nextField = makeTurn(gameField, col, turnPlayer);
@@ -7,6 +7,6 @@ export function turn(gameField, col, turnPlayer) {
 
   return {
     type: TURN,
-    payload: { gameField: nextField, winner },
+    payload: { gameField: nextField, winner }
   };
 }

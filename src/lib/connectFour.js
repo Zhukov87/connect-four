@@ -12,14 +12,17 @@ export const createField = () => [
 
 export const makeTurn = (field, col, player) => {
   const nextField = [...field];
-  let counter = 0;
-  for (let i = nextField[col].length - 1; i >= 0; i--) {
-    if (!nextField[col][i]) counter++;
-    //!nextField[col][i] ? counter++ : counter;
-    counter === 1 && !nextField[col][i]
-      ? (nextField[col][i] = player)
-      : nextField[col][i];
-  }
+
+  // const freeCellIndex = nextField[col].reduce((freeCellIndex, cell, index) => {
+  //   console.log("freeCellIndex", freeCellIndex, "index", index);
+  //   if (!cell) return freeCellIndex;
+  //   return freeCellIndex;
+  // });
+
+  const freeCellIndex = nextField[col].lastIndexOf(false);
+
+  nextField[col][freeCellIndex] = player;
+
   return nextField;
 };
 
